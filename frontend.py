@@ -4,9 +4,57 @@ import time
 from datetime import datetime
 
 st.set_page_config(page_title="Advanced URL Hitter", layout="wide")
+
+# Custom CSS Styling - Colors Layout
+st.markdown("""
+<style>
+    /* Main container background */
+    .main {
+        background: linear-gradient(to right, 
+            #f0f0f0 0%,      /* Left White */
+            #ffffff 15%,
+            #ffffff 85%,
+            #00ff00 100%     /* Right Green */
+        );
+    }
+    
+    /* Top Red Header */
+    header {
+        background-color: #ff0000 !important;
+        padding: 20px;
+        border-bottom: 5px solid #ff0000;
+    }
+    
+    /* Bottom Yellow Footer */
+    footer {
+        background-color: #ffff00 !important;
+        color: #000000;
+    }
+    
+    /* Title styling */
+    h1 {
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: #f0f0f0;
+        border-right: 5px solid #00ff00;
+    }
+    
+    /* Custom colored boxes */
+    .metric-box {
+        border-left: 5px solid #00ff00;
+        padding: 15px;
+        border-radius: 5px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 st.title("🚀 Advanced Frequency and Duration Based URL Hitter")
 
-gh --version# Sidebar for input
+# Sidebar for input
 with st.sidebar:
     st.header("⚙️ Configuration")
     frequency = st.number_input("Enter frequency (hits per second):", min_value=0.1, max_value=100.0, value=1.0, step=0.1)
@@ -17,11 +65,26 @@ with st.sidebar:
 # Main content area
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.metric("Frequency", f"{frequency} hits/sec")
+    st.markdown("""
+    <div style='background-color: #90EE90; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h4 style='color: #000000;'>⚡ Frequency</h4>
+        <h3 style='color: #006400;'>{} hits/sec</h3>
+    </div>
+    """.format(frequency), unsafe_allow_html=True)
 with col2:
-    st.metric("Duration", f"{duration} sec")
+    st.markdown("""
+    <div style='background-color: #FFD700; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h4 style='color: #000000;'>⏱️ Duration</h4>
+        <h3 style='color: #FF8C00;'>{} sec</h3>
+    </div>
+    """.format(duration), unsafe_allow_html=True)
 with col3:
-    st.metric("Total Expected Hits", f"~{int(frequency * duration)}")
+    st.markdown("""
+    <div style='background-color: #FF6347; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h4 style='color: #FFFFFF;'>🎯 Expected Hits</h4>
+        <h3 style='color: #FFFFFF;'>~{}</h3>
+    </div>
+    """.format(int(frequency * duration)), unsafe_allow_html=True)
 
 if st.button("🎯 Start Hitting URL", key="start_button"):
     if not url:
@@ -119,33 +182,80 @@ if st.button("🎯 Start Hitting URL", key="start_button"):
         
         # Final results
         st.divider()
-        st.subheader("📊 Final Results")
+        st.markdown("""
+        <h2 style='text-align: center; color: #ff0000; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);'>
+            📊 Final Results
+        </h2>
+        """, unsafe_allow_html=True)
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("Total Hits", hits)
+            st.markdown("""
+            <div style='background-color: #E8F5E9; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #00ff00;'>
+                <p style='color: #555;'>Total Hits</p>
+                <h2 style='color: #00ff00; margin: 0;'>{}</h2>
+            </div>
+            """.format(hits), unsafe_allow_html=True)
             
         with col2:
-            st.metric("Successful", successful_hits, delta=f"✅")
+            st.markdown("""
+            <div style='background-color: #E8F5E9; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #4CAF50;'>
+                <p style='color: #555;'>✅ Successful</p>
+                <h2 style='color: #4CAF50; margin: 0;'>{}</h2>
+            </div>
+            """.format(successful_hits), unsafe_allow_html=True)
         with col3:
-            st.metric("Failed", failed_hits, delta=f"❌")
+            st.markdown("""
+            <div style='background-color: #FFEBEE; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #ff0000;'>
+                <p style='color: #555;'>❌ Failed</p>
+                <h2 style='color: #ff0000; margin: 0;'>{}</h2>
+            </div>
+            """.format(failed_hits), unsafe_allow_html=True)
         with col4:
             success_rate = (successful_hits / hits * 100) if hits > 0 else 0
-            st.metric("Success Rate", f"{success_rate:.1f}%")
+            st.markdown("""
+            <div style='background-color: #FFF3E0; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #ffff00;'>
+                <p style='color: #555;'>Success Rate</p>
+                <h2 style='color: #FF8C00; margin: 0;'>{:.1f}%</h2>
+            </div>
+            """.format(success_rate), unsafe_allow_html=True)
         
         if successful_hits > 0:
             avg_response_time = total_response_time / successful_hits
             avg_size = sum(response_sizes) / len(response_sizes)
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric("Avg Response Time", f"{avg_response_time*1000:.2f}ms")
+                st.markdown("""
+                <div style='background-color: #F3E5F5; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #9C27B0;'>
+                    <p style='color: #555;'>Avg Response Time</p>
+                    <h3 style='color: #9C27B0; margin: 0;'>{:.2f}ms</h3>
+                </div>
+                """.format(avg_response_time*1000), unsafe_allow_html=True)
             with col2:
-                st.metric("Max Response Time", f"{max([rt*1000 for rt in [interval for interval in response_sizes]])/len(response_sizes)*1000:.2f}ms" if response_sizes else "N/A")
+                st.markdown("""
+                <div style='background-color: #E0F2F1; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #009688;'>
+                    <p style='color: #555;'>Avg Response Size</p>
+                    <h3 style='color: #009688; margin: 0;'>{:.0f} bytes</h3>
+                </div>
+                """.format(avg_size), unsafe_allow_html=True)
             with col3:
-                st.metric("Avg Response Size", f"{avg_size:.0f} bytes")
+                st.markdown("""
+                <div style='background-color: #FCE4EC; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #E91E63;'>
+                    <p style='color: #555;'>Performance</p>
+                    <h3 style='color: #E91E63; margin: 0;'>⚡ Good</h3>
+                </div>
+                """, unsafe_allow_html=True)
         
         st.divider()
         st.subheader("📝 Detailed Hit Log")
         st.dataframe(hit_details, use_container_width=True)
         
         st.success(f"✅ Finished hitting URL {hits} times in {duration} seconds!")
+
+# Bottom Yellow Footer
+st.markdown("""
+<div style='background-color: #ffff00; padding: 20px; text-align: center; margin-top: 30px; border-top: 5px solid #ffff00; color: #000000; font-weight: bold;'>
+    <h3>🎉 Advanced URL Hitter v2.0 | Developed by Usman406 🚀</h3>
+    <p>© 2025 - All Rights Reserved</p>
+</div>
+""", unsafe_allow_html=True)
