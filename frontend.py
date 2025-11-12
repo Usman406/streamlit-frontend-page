@@ -5,42 +5,61 @@ from datetime import datetime
 
 st.set_page_config(page_title="Advanced URL Hitter", layout="wide")
 
-# Custom CSS Styling - Colors Layout
+# Custom CSS Styling - Pakistan Background with Colors Layout
 st.markdown("""
 <style>
-    /* Main container background */
+    /* Pakistan Background Image - Hunza Valley */
     .main {
-        background: linear-gradient(to right, 
-            #f0f0f0 0%,      /* Left White */
-            #ffffff 15%,
-            #ffffff 85%,
-            #00ff00 100%     /* Right Green */
-        );
+        background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
     }
     
-    /* Top Red Header */
+    /* Dark overlay for better text visibility */
+    .main::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    /* Top Red Header - Pakistan Flag Color */
     header {
-        background-color: #ff0000 !important;
+        background: linear-gradient(to right, #CE1126 0%, #CE1126 50%, #FFFFFF 50%, #FFFFFF 100%) !important;
         padding: 20px;
-        border-bottom: 5px solid #ff0000;
+        border-bottom: 5px solid #CE1126;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
     
     /* Bottom Yellow Footer */
     footer {
-        background-color: #ffff00 !important;
+        background-color: #FFD700 !important;
         color: #000000;
+        padding: 20px;
+        border-top: 5px solid #FFD700;
+        font-weight: bold;
     }
     
     /* Title styling */
     h1 {
-        color: #ffffff;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        color: #FFFFFF;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+        background: rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        border-radius: 10px;
     }
     
     /* Sidebar styling */
     [data-testid="stSidebar"] {
-        background-color: #f0f0f0;
+        background-color: rgba(240, 240, 240, 0.95) !important;
         border-right: 5px solid #00ff00;
+        backdrop-filter: blur(5px);
     }
     
     /* Custom colored boxes */
@@ -49,10 +68,37 @@ st.markdown("""
         padding: 15px;
         border-radius: 5px;
     }
+    
+    /* Content box styling for better visibility */
+    div[data-testid="stMarkdownContainer"] {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 10px;
+    }
+</style>
+
+<style>
+    /* Pakistan Green Star decoration */
+    body::before {
+        content: '🇵🇰';
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+        z-index: 100;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 st.title("🚀 Advanced Frequency and Duration Based URL Hitter")
+
+# Add Pakistan theme subtitle
+st.markdown("""
+<div style='text-align: center; background: rgba(206, 17, 38, 0.8); padding: 15px; border-radius: 10px; margin-bottom: 20px;'>
+    <h3 style='color: #FFFFFF; margin: 0;'>🇵🇰 Pakistan Theme Edition 🇵🇰</h3>
+    <p style='color: #FFD700; margin: 5px 0 0 0;'>Made with ❤️ in Pakistan</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Sidebar for input
 with st.sidebar:
@@ -252,10 +298,12 @@ if st.button("🎯 Start Hitting URL", key="start_button"):
         
         st.success(f"✅ Finished hitting URL {hits} times in {duration} seconds!")
 
-# Bottom Yellow Footer
+# Bottom Yellow Footer with Pakistan Theme
 st.markdown("""
-<div style='background-color: #ffff00; padding: 20px; text-align: center; margin-top: 30px; border-top: 5px solid #ffff00; color: #000000; font-weight: bold;'>
-    <h3>🎉 Advanced URL Hitter v2.0 | Developed by Usman406 🚀</h3>
-    <p>© 2025 - All Rights Reserved</p>
+<div style='background: linear-gradient(to right, #CE1126 0%, #CE1126 50%, #FFFFFF 50%, #FFFFFF 100%); padding: 20px; text-align: center; margin-top: 30px; border-top: 5px solid #CE1126; color: #000000; font-weight: bold;'>
+    <h3 style='color: #CE1126;'>🎉 Advanced URL Hitter v2.0 Pakistan Edition 🇵🇰</h3>
+    <p style='color: #333;'>Developed by <strong>Usman406</strong> with ❤️</p>
+    <p style='color: #666; font-size: 12px;'>© 2025 - Pakistan | All Rights Reserved</p>
+    <p style='color: #CE1126; font-size: 10px;'>🏔️ Hunza Valley Background | Pakistan's Beauty 🏔️</p>
 </div>
 """, unsafe_allow_html=True)
