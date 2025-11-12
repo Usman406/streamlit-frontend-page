@@ -5,41 +5,44 @@ from datetime import datetime
 
 st.set_page_config(page_title="Advanced URL Hitter", layout="wide")
 
-# Custom CSS Styling - Pakistan Background with Colors Layout
+# Custom CSS Styling - Pakistan Background with Dark Theme
 st.markdown("""
 <style>
-    /* Body background - Hunza Valley Background Image */
+    /* Body background - Hunza Valley Background Image (dark overlay) */
     html, body {
-        background: linear-gradient(rgba(206, 17, 38, 0.4), rgba(31, 71, 136, 0.4)), 
+        background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), 
                     url('https://intentionaldetours.com/wp-content/uploads/2022/10/ttd-hunza-cover-photo-1030x687.jpg') center/cover fixed !important;
         margin: 0;
         padding: 0;
+        color: #e6e6e6;
     }
     
-    /* Main app container */
+    /* Main app container transparent so background shows */
     [data-testid="stAppViewContainer"] {
         background: transparent !important;
     }
     
-    /* Main content area with semi-transparent white background */
+    /* Main content area with semi-transparent dark background */
     .main {
-        background: rgba(255, 255, 255, 0.92) !important;
+        background: rgba(0, 0, 0, 0.75) !important;
         border-radius: 15px;
+        color: #f5f5f5;
     }
     
-    /* Top Red Header - Pakistan Flag Color */
+    /* Top Red Header - Pakistan Flag Color (use black instead of white) */
     header {
-        background: linear-gradient(to right, #CE1126 0%, #CE1126 50%, #FFFFFF 50%, #FFFFFF 100%) !important;
+        background: linear-gradient(to right, #CE1126 0%, #CE1126 50%, #000000 50%, #000000 100%) !important;
         padding: 25px;
         border-bottom: 5px solid #CE1126;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.6);
         border-radius: 10px 10px 0 0;
+        color: #ffffff;
     }
     
-    /* Bottom Yellow Footer */
+    /* Bottom Footer - darker variant */
     footer {
-        background: linear-gradient(to right, #CE1126 0%, #CE1126 50%, #FFFFFF 50%, #FFFFFF 100%) !important;
-        color: #000000;
+        background: linear-gradient(to right, #000000 0%, #000000 100%) !important;
+        color: #ffffff;
         padding: 20px;
         border-top: 5px solid #CE1126;
         font-weight: bold;
@@ -49,40 +52,43 @@ st.markdown("""
     /* Title styling */
     h1 {
         color: #FFFFFF;
-        text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+        text-shadow: 3px 3px 8px rgba(0,0,0,0.9);
         background: linear-gradient(135deg, #CE1126 0%, #1F4788 100%);
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.5);
     }
     
-    /* Sidebar styling */
+    /* Sidebar styling - dark */
     [data-testid="stSidebar"] {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 240, 240, 0.98) 100%) !important;
+        background: linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(30,30,30,0.95) 100%) !important;
         border-right: 5px solid #00ff00;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+        box-shadow: 2px 0 12px rgba(0,0,0,0.6);
+        color: #f0f0f0;
     }
     
     /* Sidebar header */
     [data-testid="stSidebar"] h2 {
-        color: #CE1126;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        color: #FFD966;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     }
     
-    /* Custom colored boxes */
+    /* Custom colored boxes - darkened */
     .metric-box {
         border-left: 5px solid #00ff00;
         padding: 15px;
         border-radius: 5px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(0, 0, 0, 0.6);
+        color: #f5f5f5;
     }
     
     /* Content box styling */
     div[data-testid="stMarkdownContainer"] {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(0, 0, 0, 0.65);
         border-radius: 10px;
         padding: 15px;
         margin: 10px 0;
+        color: #eee;
     }
     
     /* Button styling */
@@ -93,12 +99,12 @@ st.markdown("""
         border-radius: 8px !important;
         padding: 10px 20px !important;
         font-weight: bold !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4) !important;
     }
     
     button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.6) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -125,23 +131,23 @@ with st.sidebar:
 col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("""
-    <div style='background-color: #90EE90; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h4 style='color: #000000;'>⚡ Frequency</h4>
-        <h3 style='color: #006400;'>{} hits/sec</h3>
+    <div style='background-color: #0b6623; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h4 style='color: #FFFFFF; margin:0;'>⚡ Frequency</h4>
+        <h3 style='color: #E6FFEA; margin:0;'>{} hits/sec</h3>
     </div>
     """.format(frequency), unsafe_allow_html=True)
 with col2:
     st.markdown("""
-    <div style='background-color: #FFD700; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h4 style='color: #000000;'>⏱️ Duration</h4>
-        <h3 style='color: #FF8C00;'>{} sec</h3>
+    <div style='background-color: #8B6508; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h4 style='color: #FFFFFF; margin:0;'>⏱️ Duration</h4>
+        <h3 style='color: #FFF4CC; margin:0;'>{} sec</h3>
     </div>
     """.format(duration), unsafe_allow_html=True)
 with col3:
     st.markdown("""
-    <div style='background-color: #FF6347; padding: 15px; border-radius: 10px; text-align: center;'>
-        <h4 style='color: #FFFFFF;'>🎯 Expected Hits</h4>
-        <h3 style='color: #FFFFFF;'>~{}</h3>
+    <div style='background-color: #8B1A1A; padding: 15px; border-radius: 10px; text-align: center;'>
+        <h4 style='color: #FFFFFF; margin:0;'>🎯 Expected Hits</h4>
+        <h3 style='color: #FFECEC; margin:0;'>~{}</h3>
     </div>
     """.format(int(frequency * duration)), unsafe_allow_html=True)
 
@@ -250,32 +256,32 @@ if st.button("🎯 Start Hitting URL", key="start_button"):
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             st.markdown("""
-            <div style='background-color: #E8F5E9; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #00ff00;'>
-                <p style='color: #555;'>Total Hits</p>
-                <h2 style='color: #00ff00; margin: 0;'>{}</h2>
+            <div style='background-color: #102b10; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #00ff00;'>
+                <p style='color: #ddd; margin:0;'>Total Hits</p>
+                <h2 style='color: #7CFF7C; margin: 0;'>{}</h2>
             </div>
             """.format(hits), unsafe_allow_html=True)
             
         with col2:
             st.markdown("""
-            <div style='background-color: #E8F5E9; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #4CAF50;'>
-                <p style='color: #555;'>✅ Successful</p>
-                <h2 style='color: #4CAF50; margin: 0;'>{}</h2>
+            <div style='background-color: #123012; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #4CAF50;'>
+                <p style='color: #ddd; margin:0;'>✅ Successful</p>
+                <h2 style='color: #66ff88; margin: 0;'>{}</h2>
             </div>
             """.format(successful_hits), unsafe_allow_html=True)
         with col3:
             st.markdown("""
-            <div style='background-color: #FFEBEE; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #ff0000;'>
-                <p style='color: #555;'>❌ Failed</p>
-                <h2 style='color: #ff0000; margin: 0;'>{}</h2>
+            <div style='background-color: #2b0a0a; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #ff0000;'>
+                <p style='color: #ddd; margin:0;'>❌ Failed</p>
+                <h2 style='color: #ff7a7a; margin: 0;'>{}</h2>
             </div>
             """.format(failed_hits), unsafe_allow_html=True)
         with col4:
             success_rate = (successful_hits / hits * 100) if hits > 0 else 0
             st.markdown("""
-            <div style='background-color: #FFF3E0; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #ffff00;'>
-                <p style='color: #555;'>Success Rate</p>
-                <h2 style='color: #FF8C00; margin: 0;'>{:.1f}%</h2>
+            <div style='background-color: #3a2b00; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #ffff00;'>
+                <p style='color: #ddd; margin:0;'>Success Rate</p>
+                <h2 style='color: #FFD966; margin: 0;'>{:.1f}%</h2>
             </div>
             """.format(success_rate), unsafe_allow_html=True)
         
@@ -285,23 +291,23 @@ if st.button("🎯 Start Hitting URL", key="start_button"):
             col1, col2, col3 = st.columns(3)
             with col1:
                 st.markdown("""
-                <div style='background-color: #F3E5F5; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #9C27B0;'>
-                    <p style='color: #555;'>Avg Response Time</p>
-                    <h3 style='color: #9C27B0; margin: 0;'>{:.2f}ms</h3>
+                <div style='background-color: #2b1738; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #9C27B0;'>
+                    <p style='color: #e6e6e6; margin:0;'>Avg Response Time</p>
+                    <h3 style='color: #D1B3FF; margin: 0;'>{:.2f}ms</h3>
                 </div>
                 """.format(avg_response_time*1000), unsafe_allow_html=True)
             with col2:
                 st.markdown("""
-                <div style='background-color: #E0F2F1; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #009688;'>
-                    <p style='color: #555;'>Avg Response Size</p>
-                    <h3 style='color: #009688; margin: 0;'>{:.0f} bytes</h3>
+                <div style='background-color: #083230; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #009688;'>
+                    <p style='color: #e6e6e6; margin:0;'>Avg Response Size</p>
+                    <h3 style='color: #9BEBCD; margin: 0;'>{:.0f} bytes</h3>
                 </div>
                 """.format(avg_size), unsafe_allow_html=True)
             with col3:
                 st.markdown("""
-                <div style='background-color: #FCE4EC; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #E91E63;'>
-                    <p style='color: #555;'>Performance</p>
-                    <h3 style='color: #E91E63; margin: 0;'>⚡ Good</h3>
+                <div style='background-color: #3a0f1a; padding: 15px; border-radius: 8px; text-align: center; border-left: 5px solid #E91E63;'>
+                    <p style='color: #e6e6e6; margin:0;'>Performance</p>
+                    <h3 style='color: #FFB3C6; margin: 0;'>⚡ Good</h3>
                 </div>
                 """, unsafe_allow_html=True)
         
