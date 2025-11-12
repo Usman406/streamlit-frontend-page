@@ -11,7 +11,7 @@ st.markdown("""
     /* Body background - Hunza Valley Background Image */
     html, body {
         background: linear-gradient(rgba(206, 17, 38, 0.4), rgba(31, 71, 136, 0.4)), 
-                    url('https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover fixed !important;
+                    url('https://intentionaldetours.com/wp-content/uploads/2022/10/ttd-hunza-cover-photo-1030x687.jpg') center/cover fixed !important;
         margin: 0;
         padding: 0;
     }
