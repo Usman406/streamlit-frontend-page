@@ -8,58 +8,65 @@ st.set_page_config(page_title="Advanced URL Hitter", layout="wide")
 # Custom CSS Styling - Pakistan Background with Colors Layout
 st.markdown("""
 <style>
-    /* Pakistan Background Image - Hunza Valley */
-    .main {
-        background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop');
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
+    /* Body background - Hunza Valley Background Image */
+    html, body {
+        background: linear-gradient(rgba(206, 17, 38, 0.4), rgba(31, 71, 136, 0.4)), 
+                    url('https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover fixed !important;
+        margin: 0;
+        padding: 0;
     }
     
-    /* Dark overlay for better text visibility */
-    .main::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.3);
-        pointer-events: none;
-        z-index: -1;
+    /* Main app container */
+    [data-testid="stAppViewContainer"] {
+        background: transparent !important;
+    }
+    
+    /* Main content area with semi-transparent white background */
+    .main {
+        background: rgba(255, 255, 255, 0.92) !important;
+        border-radius: 15px;
     }
     
     /* Top Red Header - Pakistan Flag Color */
     header {
         background: linear-gradient(to right, #CE1126 0%, #CE1126 50%, #FFFFFF 50%, #FFFFFF 100%) !important;
-        padding: 20px;
+        padding: 25px;
         border-bottom: 5px solid #CE1126;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        border-radius: 10px 10px 0 0;
     }
     
     /* Bottom Yellow Footer */
     footer {
-        background-color: #FFD700 !important;
+        background: linear-gradient(to right, #CE1126 0%, #CE1126 50%, #FFFFFF 50%, #FFFFFF 100%) !important;
         color: #000000;
         padding: 20px;
-        border-top: 5px solid #FFD700;
+        border-top: 5px solid #CE1126;
         font-weight: bold;
+        border-radius: 0 0 10px 10px;
     }
     
     /* Title styling */
     h1 {
         color: #FFFFFF;
-        text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
-        background: rgba(0, 0, 0, 0.3);
+        text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+        background: linear-gradient(135deg, #CE1126 0%, #1F4788 100%);
         padding: 20px;
         border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
     
     /* Sidebar styling */
     [data-testid="stSidebar"] {
-        background-color: rgba(240, 240, 240, 0.95) !important;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 240, 240, 0.98) 100%) !important;
         border-right: 5px solid #00ff00;
-        backdrop-filter: blur(5px);
+        box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Sidebar header */
+    [data-testid="stSidebar"] h2 {
+        color: #CE1126;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
     
     /* Custom colored boxes */
@@ -67,25 +74,31 @@ st.markdown("""
         border-left: 5px solid #00ff00;
         padding: 15px;
         border-radius: 5px;
+        background: rgba(255, 255, 255, 0.9);
     }
     
-    /* Content box styling for better visibility */
+    /* Content box styling */
     div[data-testid="stMarkdownContainer"] {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.9);
         border-radius: 10px;
-        padding: 10px;
+        padding: 15px;
+        margin: 10px 0;
     }
-</style>
-
-<style>
-    /* Pakistan Green Star decoration */
-    body::before {
-        content: '🇵🇰';
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        font-size: 30px;
-        z-index: 100;
+    
+    /* Button styling */
+    button {
+        background: linear-gradient(135deg, #CE1126 0%, #1F4788 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 10px 20px !important;
+        font-weight: bold !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    }
+    
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
     }
 </style>
 """, unsafe_allow_html=True)
